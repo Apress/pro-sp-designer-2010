@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ Page Language="C#" %>
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+<meta name="WebPartPageExpansion" content="full" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled 1</title>
+<style type="text/css">
+	body  {
+		font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+	}
+	div {
+		display: block;
+	}
+	#chart {
+		width: 200px;
+		border: 2px black double;
+		padding: 5px 5px 5px 5px;
+	}
+	.bar { height: 15px; }
+	.red { background-color: red;  }
+	.blue { background-color:blue; }
+	.green { background-color:green; }
+	.yellow { background-color:yellow; }
+</style>
+</head>
+<body>
+<div id="chart">
+		<div id="east">East<br/><div class="red bar" style="width: 160px"></div ></div>
+		<div id="west">West<br/><div class="blue bar" style="width: 180px"></div ></div>
+		<div id="north">North<br/><div class="green bar" style="width: 120px"></div ></div>
+		<div id="south">South<br/><div class="yellow bar" style="width: 130px"></div ></div>
+	</div>
+</body>
+</html>

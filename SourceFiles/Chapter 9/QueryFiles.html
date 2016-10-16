@@ -1,0 +1,60 @@
+﻿
+<script type="text/javascript">
+
+ExecuteOrDelayUntilScriptLoaded(LoadPages, "sp.js"); 
+
+var ctx; 
+var web;     
+var list;
+var itemCollection;
+
+function LoadPages()
+{
+	ctx = new SP.ClientContext.get_current();
+	
+	web = ctx.get_web();   
+	ctx.load(web);
+	
+	list = web.get_lists().getByTitle("Scripts");
+	ctx.load(list);
+	
+	var qry = new SP.CamlQuery();
+	qry .set_viewXml(
+	    "<View>"
+        + "<ViewFields><FieldRef Name='ID' /><FieldRef Name='FileLeafRef' /><FieldRef Name='Modified' /></ViewFields>"
+        + "<RowLimit>50</RowLimit>"
+        + "</View>");
+	itemCollection = list.getItems(qry); 
+	ctx.load(itemCollection );
+	
+	ctx.executeQueryAsync(
+	    Function.createDelegate(this, this.onQuerySuccess), 
+	    Function.createDelegate(this, this.onQueryFailed));	
+}
+
+function onQuerySuccess(sender, args)
+{
+	var s = '';
+    
+    var itemEnumerator = itemCollection .getEnumerator();
+    while (itemEnumerator .moveNext()) 
+    {
+    	var item = itemEnumerator .get_current();
+    	
+    	s = s + item.get_item('FileLeafRef') + ' modified on ' + item.get_item('Modified') + "<br />";
+    }
+
+    document.getElementById('output').innerHTML = s;
+}
+
+function onQueryFailed(sender, args)
+{
+	alert('Query failed.');
+}
+</script>
+<div id="output"></div>
+<p>
+<input name="cmdRefresh" type="button" value="Refresh" onclick="javascript:LoadPages();"/>
+</p>
+
+

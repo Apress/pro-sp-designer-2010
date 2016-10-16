@@ -1,0 +1,29 @@
+<tr>
+	<td class="s4-titlelogo" rowspan="2">
+		<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitleGraphic">
+			<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="/_layouts/images/siteIcon.png" runat="server"/>
+		</SharePoint:SPLinkButton>
+	</td>
+	<td class="customHeader sr-titletext">
+		<h1 name="onetidProjectPropertyTitle">
+			<asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server">
+				<SharePoint:SPLinkButton runat="server" NavigateUrl="~site/" id="onetidProjectPropertyTitle">
+				<SharePoint:ProjectProperty Property="Title" runat="server" /></SharePoint:SPLinkButton>
+			</asp:ContentPlaceHolder>
+		</h1>									
+	</td>
+</tr>
+<tr>
+	<td class="s4-titletext">
+      <div class="customSpacer">&nbsp;</div>
+      <span id="onetidPageTitleSeparator" class="s4-nothome s4-bcsep s4-titlesep">
+		<SharePoint:ClusteredDirectionalSeparatorArrow runat="server"/> </span>
+		<h2>
+			<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
+		</h2>
+		<div class="s4-pagedescription" tabindex="0" >
+			<div class="customSpacer">&nbsp;</div>
+			<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server"/>
+		</div>
+	</td>
+</tr>

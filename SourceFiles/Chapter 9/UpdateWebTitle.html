@@ -1,0 +1,46 @@
+﻿<script type="text/javascript">
+	ExecuteOrDelayUntilScriptLoaded(GetProperties, "sp.js");
+
+	var web;
+
+    function GetProperties() {
+        var ctx = new SP.ClientContext.get_current();
+        
+        web = ctx.get_web();
+        ctx.load(web, 'Title');
+        
+        ctx.executeQueryAsync(Function.createDelegate(this, this.onLoadSuccess), Function.createDelegate(this, this.onLoadFail));
+    }
+    function onLoadSuccess(sender, args) {
+        document.getElementById('output').innerText = 'Current Web Title: ' + web.get_title();
+        document.getElementById('txtTitle').value = web.get_title();
+    }
+    function onLoadFail(sender, args) { 
+       document.getElementById('output').innerText = 'Failed to get the web. Error:' + args.get_message();
+    }
+        
+    function UpdateTitle() {
+        var ctx = new SP.ClientContext.get_current();
+        
+        web = ctx.get_web();
+        web.set_title(document.getElementById('txtTitle').value);
+        web.update();
+        
+        ctx.executeQueryAsync(Function.createDelegate(this, this.onUpdateSucceed), Function.createDelegate(this, this.onUpdateFail));
+    }
+    function onUpdateSucceed(sender, args) {
+        alert('The title was updated, but you have to refresh the page to see it in the site header.');
+        GetProperties();
+    }
+    function onUpdateFail(sender, args) {
+        alert('Unable to update the title. Error: ' + args.get_message());
+    }   
+</script>
+
+<h1 id="output"></h1>
+<p>
+	New Site Title: <input type="text" id="txtTitle" value="" size="50" />
+</p>
+<p>
+	<input name="btnUpdate" type="button" value="Update Title" onclick="javascript:UpdateTitle();" />
+</p>

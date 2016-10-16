@@ -1,0 +1,24 @@
+﻿<script type="text/javascript">
+    ExecuteOrDelayUntilScriptLoaded(GetProperties, "sp.js");
+
+    var web;
+
+    function GetProperties() {
+        var ctx = new SP.ClientContext.get_current();
+        web = ctx.get_web();
+        ctx.load(web, 'Title');
+
+        ctx.executeQueryAsync(
+            Function.createDelegate(this, this.onLoadSuccess),
+            Function.createDelegate(this, this.onLoadFail));
+    }
+    function onLoadSuccess(sender, args) {
+    document.getElementById('output').innerText = 
+        'Current Web Title: ' + web.get_title();
+    }
+    function onLoadFail(sender, args){
+        document.getElementById('output').innerText = 
+            'Failed to get the web. Error:' + args.get_message();
+    }
+</script>
+<h1 id="output"></h1>
